@@ -1,0 +1,6 @@
+# no op
+#
+# edit start
+#e avr-llvm.patch
+# edit end
+#wq

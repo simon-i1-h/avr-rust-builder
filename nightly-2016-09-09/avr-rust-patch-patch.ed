@@ -1,0 +1,215 @@
+# TODO ファイル間の移動をコメントで記す
+# edit start
+e avr-rust.patch
+# editing
+## README.md, .travis.yml
+### remove .travis.yml and README.md
+14
+.,+469d
+## configure
+### remove LLVM version patch on configure
++4
+.,+8d
+## src/bootstrap/build/native.rs -> src/bootstrap/native.rs
+### move native.rs src/bootstrap/build/ to src/bootstrap
++9
+.s/^\(.\{27\}\)......\(.\{25\}\)......\(.*\)$/\1\2\3/
++2
+.s/^\(.\{20\}\)......\(.*\)$/\1\2/
++
+.s/^\(.\{20\}\)......\(.*\)$/\1\2/
+### fix line number
++
+.s/^\(.....\).\(.....\).\(.*\)$/\15\25\3/
+### add LLVM Target
+#### yank LLVM Target
+.r !sed -n -e '68s/^.*\(.\{10\}\)$/\1/;68p' "${WORK}/rust/src/bootstrap/native.rs"
+#### merge LLVM Target
++4
+.s/\(.*\)..$/\1/
+-4y
+.x
+-1,.j
+#### merge LLVM Target
++
+.s/\(.*\)..$/\1/
+-5y
+.x
+-1,.j
+#### remove tmp LLVM Target
+-5d
+## src/librustc_back/target/avr_atmel_none.rs
+### add patch
++31
+.s/^\(.\{13\}\)\(.*\).$/\1{\2, TargetResult};/
++2
+.s/^\(.\{26\}\)\(.*\)$/\1Result\2/
++
+.s/^\(.....\)\(.*\)$/\1Ok(\2/
++10
+.s/^\(.*\)$/\1)/
+## src/librustc_llvm/build.rs
+### fix line number
++75
+.s/^\(.....\).\(.....\).\(.*\)$/\16\26\3/
+### add component
+#### yank component
+.r !sed -n -e '69s/^.*\(.\{13\}\)$/\1/;69p' "${WORK}/rust/src/librustc_llvm/build.rs"
+#### merge component
++4
+.s/\(.*\)..$/\1/
+-4y
+.x
+-1,.j
+#### merge component
++
+.s/\(.*\)..$/\1/
+-5y
+.x
+-1,.j
+#### remove tmp component
+-5d
+### insert patch
++8
+.i
+@@ -122,1 +122,2 @@
++       .compiler("clang++")
+.
+.r !sed -n -e '122p' "${WORK}/rust/src/librustc_llvm/build.rs"
+.s/^\(.*\)$/ \1/
+### fix line number
++
+.s/^\(......\).\(......\).\(.*\)$/\17\28\3/
+### fix line number
++9
+.s/^\(......\).\(.\).\(....\).\(.\).\(.*\)$/\18\24\39\46\5/
+### replace code
++6
+.,+2d
+-
+.r !sed -n -e '141p' "${WORK}/rust/src/librustc_llvm/build.rs"
+.s/^\(.*\)$/ \1/
+## src/librustc_llvm/lib.rs, src/librustc_llvm/ffi.rs
+### copy diff metadata
++
+.,+3y
++23x
+### lib.rs -> ffi.rs
+-27
+.s/^\(.\{31\}\)...\(.\{24\}\)...\(.*\)$/\1ffi\2ffi\3/
+### create dummy commits
++
+.s/^\(......\).\{16\}\(.*\)$/\1badf00d..deadbeef\2/
+### lib.rs -> ffi.rs
++
+.s/^\(.\{24\}\)...\(.*\)$/\1ffi\2/
++
+.s/^\(.\{24\}\)...\(.*\)$/\1ffi\2/
+### fix line number
++
+.s/^\(....\).\{10\}\(.*\)$/\146,3 +46,5\2/
+### remove code
++
+.,+d
++6
+.,+10d
+### fix line number
++4
+.s/^\(....\)....\(....\)....\(.*\)$/\1406\2406\3/
+## src/librustc_trans/abi.rs
+### fix line number
++25
+.s/^\(.....\)....\(...\)....\(.*\)$/\170,4\271,6\3/
+### replace code
++6
+.,+2d
+-
+.r !sed -n -e '273p' "${WORK}/rust/src/librustc_trans/abi.rs"
+.s/^\(.*\)$/ \1/
+### fix line number
++
+.s/^\(......\).\(......\).\(.*\)$/\13\26\3/
+## src/librustc_trans/builder.rs
+### remove code
++8
+.,+12d
+## src/librustc_trans/context.rs, src/librustc_trans/debuginfo/metadata.rs, src/librustc_trans/debuginfo/mod.rs
+### remove code
++174
+.,+112d
+## src/librustc_trans/lib.rs
+### fix line number
++4
+.s/^\(.....\).\(.\).\(...\).\(.\).\(.*\)$/\17\24\37\45\5/
+### remove code
++6
+.,+d
+## src/librustc_trans/mir/rvalue.rs
+### append patch
+#### add metadata
+-
+a
+diff --git a/src/librustc_trans/mir/rvalue.rs b/src/librustc_trans/mir/rvalue.rs
+index badf00d..deadbeef
+--- a/src/librustc_trans/mir/rvalue.rs
++++ b/src/librustc_trans/mir/rvalue.rs
+.
+#### add 16bit intager type
+a
+@@ -643,1 +643,2 @@
+.
+.r !sed -n -e '643p' "${WORK}/rust/src/librustc_trans/mir/rvalue.rs"
+.s/^\(.*\)$/+\1/
+.s/32/16/g
+.r !sed -n -e '643p' "${WORK}/rust/src/librustc_trans/mir/rvalue.rs"
+.s/^\(.*\)$/ \1/
+### add 16bit unsigned intager type
+a
+@@ -648,1 +649,2 @@
+.
+.r !sed -n -e '648p' "${WORK}/rust/src/librustc_trans/mir/rvalue.rs"
+.s/^\(.*\)$/+\1/
+.s/32/16/g
+.r !sed -n -e '648p' "${WORK}/rust/src/librustc_trans/mir/rvalue.rs"
+.s/^\(.*\)$/ \1/
+## src/libstd/env.rs
+### fix line number
++5
+.s/^\(.....\)....\(...\)....\(.*\)$/\158,4\258,5\3/
+### remove code
++6
+.,+d
+### fix line number
+.s/^\(....\)...\(....\)...\(.*\)$/\1922\2922\3/
+## src/libsyntax/abi.rs
+### fix line number
++24
+.s/^\(....\)....\(...\)...\(.*\)$/\142,3\23,5\3/
+### remove code
++
+.,+2d
+### fix line number
++13
+.s/^\(.....\).........\(.*\)$/\14,3 +88,5\2/
+### remove code
++
+.,+2d
+## src/rustllvm/PassWrapper.cpp, src/rustllvm/RustWrapper.cpp
+### remove code
++13
+.,+64d
+## src/tools/compiletest/src/util.rs
+### fix line number
++4
+.s/^\(....\)..\(....\)..\(.*\)$/\119\219\3/
+### add indents
++
+.,+6s/^\([ +-]\) *\(.*\)$/\1                                                            \2/g
+### fix line number
++
+.s/^\(....\)..\(....\)..\(.*\)$/\131\232\3/
+### add indents
++
+.,+6s/^\([ +-]\) *\(.*\)$/\1                                                              \2/g
+# edit end
+wq

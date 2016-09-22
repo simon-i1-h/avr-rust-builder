@@ -1,0 +1,18 @@
+# TODO ファイル名を記す
+# edit start
+e avr-compiler-rt.patch
+# editing
+# change line number
+56
+## replace
+.s/^\(......\).\(.....\)..\(.*\)$/\19\230\3/
+64
+## replace
+.s/^\(......\).\(.\).\(....\).\(.\).\(...\).*$/\15\22\37\42\5/
+## delete line
++
+.,+2d
++3
+.,+d
+# edit end
+wq
