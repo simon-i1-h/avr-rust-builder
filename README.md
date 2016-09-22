@@ -1,6 +1,6 @@
 ## Usage
 
-./build.sh
+`./build.sh`
 
 ## Require commands
 
