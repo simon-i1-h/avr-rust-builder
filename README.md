@@ -4,7 +4,12 @@
 
 ## Require commands
 
-- git cmake make ed sed clang++
+- git
+- cmake
+- make
+- ed
+- sed
+- clang++
 - LLVM require commands
 - compiler-rt require commands
 - Rust require commands
