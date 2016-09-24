@@ -5,8 +5,6 @@
 ## Require commands
 
 - git
-- cmake
-- make
 - ed
 - sed
 - clang++
