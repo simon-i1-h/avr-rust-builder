@@ -5,7 +5,7 @@
 ## Require commands
 
 - git
-- ed
+- GNU ed
 - sed
 - clang++
 - LLVM require commands

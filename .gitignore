@@ -1,2 +1,9 @@
 *~
 make-patch-workspace
+*/*.patch
+*/rust/
+*/install-rust-root/
+*/install-llvm-root/
+*/avr-rust/
+*/avr-llvm/
+*/avr-compiler-rt
