@@ -100,4 +100,4 @@ echo 'install directory: '"${WORK}/install-rust-root/"
 echo
 echo 'optional:'
 echo '$ rustup toochain link avr-atmel-none /path/to/install-rust-root'
-echo '$ cp /path/to/rust-nightly/bin/cargo /path/to/install-rust-root/bin/'
+echo '$ cp /other/path/to/rust-nightly/bin/cargo /path/to/install-rust-root/bin/'

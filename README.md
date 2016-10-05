@@ -2,6 +2,13 @@
 
 `./build.sh`
 
+### Build after operation
+
+```
+$ rustup toochain link avr-atmel-none /path/to/install-rust-root
+$ cp /other/path/to/rust-nightly/bin/cargo /path/to/install-rust-root/bin/
+```
+
 ## Require commands
 
 - git
