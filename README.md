@@ -1,6 +1,6 @@
 ## NEWS
 
-[https://github.com/rust-embedded/rfcs/issues/3]
+<https://github.com/rust-embedded/rfcs/issues/3>
 
 ## Usage
 
