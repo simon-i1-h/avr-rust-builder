@@ -1,3 +1,7 @@
+# DEPRECATED
+
+goto <https://github.com/avr-rust/rust>
+
 ## NEWS
 
 <https://github.com/rust-embedded/rfcs/issues/3>
